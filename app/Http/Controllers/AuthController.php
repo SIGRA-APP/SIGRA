@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gereja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,9 @@ class AuthController extends Controller
 
     public function showLoginFormSA(Request $request)
     {
-        return view('auth.login');
+        $gereja = Gereja::first();
+        $nama_gereja = $gereja->nama_gereja;
+        return view('auth.login', compact('nama_gereja'));
     }
 
     public function landing()

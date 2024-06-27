@@ -12,7 +12,7 @@
 <div class="card-box mb-30">
     <div class="pd-20">
         <h4 class="text-blue h4">List Admin Gereja</h4>
-        <a href="{{ route('list-admin.create') }}" class="btn btn-primary pull-right"
+        <a href="{{ url('/' . $nama_gereja . '/list-admin/create') }}" class="btn btn-primary pull-right"
             style="float: right; margin-top: -5px; margin-bottom:8px;"> Buat Baru</a>
     </div>
     <!-- Vertical Form -->
@@ -37,8 +37,8 @@
                         <td>{{ $u->email }}</td>
                         <td>{{ $u->gereja->nama_gereja}} </td>
                         <td>
-                            <a href="{{ route('list-admin.edit', $u->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <form action="{{ route('list-admin.destroy', $u->id) }}" method="POST" style="display:inline-block;">
+                            <a href="{{ url('/' . $nama_gereja . '/list-admin/' . $u->id . '/edit') }}" class="btn btn-sm btn-primary">Edit</a>
+                            <form action="{{ url('/' . $nama_gereja . '/list-admin/' . $u->id . '/destroy') }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Hapus</button>

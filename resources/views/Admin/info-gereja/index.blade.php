@@ -12,7 +12,7 @@
 <div class="card-box mb-30">
     <div class="pd-20">
         <h4 class="text-blue h4">List Gereja</h4>
-        <a href="{{ route('info.create') }}" class="btn btn-primary pull-right" style="float: right; margin-top: -5px; margin-bottom:8px;"> Buat Baru</a>
+        <a href="{{ url('/' . $nama_gereja . '/info/create') }}" class="btn btn-primary pull-right" style="float: right; margin-top: -5px; margin-bottom:8px;"> Buat Baru</a>
     </div>
     <!-- Vertical Form -->
     <div class="pb-20">
@@ -40,10 +40,13 @@
                     <td>
                         <div class="d-flex">
                             <div class="btn-1">
-                                <a href="{{ route('info.edit', $inf->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a             
+                                href="{{ url('/' . $nama_gereja . '/info/' . $inf->id . '/edit') }}"
+
+                                class="btn btn-sm btn-primary">Edit</a>
                             </div> &nbsp;&nbsp;&nbsp;
                             <div class="btn-2">
-                                <form action="{{ route('info.destroy', $inf->id) }}" method="POST" style="display:inline-block;">
+                                <form action="{{ url('/' . $nama_gereja . '/info/' . $inf->id . '/destroy') }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Hapus</button>

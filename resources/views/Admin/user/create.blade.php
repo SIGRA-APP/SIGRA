@@ -51,7 +51,7 @@
                 </div>
                 @endif
 
-                <form action="{{ route('list-admin.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/' . $nama_gereja . '/list-admin') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Name</label>

@@ -14,8 +14,9 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $nama_gereja = Gereja::first()->nama_gereja;
         $admin = Users::where('role', 'admin')->get(); 
-        return view('admin.user.index', compact('admin'));
+        return view('admin.user.index', compact('admin','nama_gereja'));
     }
 
     /**
@@ -23,8 +24,9 @@ class AdminController extends Controller
      */
     public function create()
     {
+        $nama_gereja = Gereja::first()->nama_gereja;
         $gereja = Gereja::all(); 
-        return view('admin.user.create', compact('gereja'));
+        return view('admin.user.create', compact('gereja','nama_gereja'));
     }
 
     /**
@@ -49,9 +51,9 @@ class AdminController extends Controller
         $admin->role = 'admin';
 
         if ($admin->save()) {
-            return redirect()->route('list-admin.index')->with('success', 'Admin gereja berhasil disimpan.');
+            return redirect()->back()->with('success', 'Admin gereja berhasil disimpan.');
         } else {
-            return redirect()->route('list-admin.create')->withErrors(['error' => 'Gagal menyimpan data Admin Gereja.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal menyimpan data Admin Gereja.']);
         }
     }
 
@@ -69,8 +71,9 @@ class AdminController extends Controller
     public function edit($id)
     {
         $gereja = Gereja::all(); 
+        $nama_gereja = Gereja::first()->nama_gereja;
         $admin = Users::findOrFail($id);
-        return view('admin.user.edit', compact('admin','gereja'));
+        return view('admin.user.edit', compact('admin','gereja','nama_gereja'));
     }
 
     /**
@@ -96,9 +99,9 @@ class AdminController extends Controller
         }
 
         if ($admin->save()) {
-            return redirect()->route('list-admin.index')->with('success', 'Admin gereja berhasil diperbarui.');
+            return redirect()->back()->with('success', 'Admin gereja berhasil diperbarui.');
         } else {
-            return redirect()->route('list-admin.edit', $admin->id)->withErrors(['error' => 'Gagal memperbarui data Admin Gereja.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal memperbarui data Admin Gereja.']);
         }
     }
 
@@ -108,9 +111,9 @@ class AdminController extends Controller
     public function destroy(Users $admin)
     {
         if ($admin->delete()) {
-            return redirect()->route('list-admin.index')->with('success', 'Admin gereja berhasil dihapus.');
+            return redirect()->back()->with('success', 'Admin gereja berhasil dihapus.');
         } else {
-            return redirect()->route('list-admin.index')->withErrors(['error' => 'Gagal menghapus data Admin Gereja.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal menghapus data Admin Gereja.']);
         }
     }
 }

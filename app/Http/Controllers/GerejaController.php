@@ -13,15 +13,17 @@ class GerejaController extends Controller
     public function index()
     {
         $gereja = Gereja::all(); 
-        return view('admin.info-gereja.index', compact('gereja'));
+        $nama_gereja = $gereja->first()->nama_gereja;
+        return view('admin.info-gereja.index', compact('gereja','nama_gereja'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.info-gereja.create');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.info-gereja.create',compact('nama_gereja'));
     }
 
     /**
@@ -45,9 +47,9 @@ class GerejaController extends Controller
         $info->kontak = $validatedData['kontak'];
 
         if ($info->save()) {
-            return redirect()->route('info.index')->with('success', 'Data informasi gereja berhasil disimpan.');
+            return redirect()->back()->with('success', 'Data informasi gereja berhasil disimpan.');
         } else {
-            return redirect()->route('info.create')->withErrors(['error' => 'Gagal menyimpan data informasi gereja.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal menyimpan data informasi gereja.']);
         }
     }
 
@@ -65,7 +67,8 @@ class GerejaController extends Controller
     public function edit($id)
     {
         $gereja = Gereja::findOrFail($id);
-        return view('admin.info-gereja.edit', compact('gereja'));
+        $nama_gereja = $gereja->first()->nama_gereja;
+        return view('admin.info-gereja.edit', compact('gereja','nama_gereja'));
     }
 
     /**
@@ -89,9 +92,9 @@ class GerejaController extends Controller
         $info->kontak = $validatedData['kontak'];
 
         if ($info->save()) {
-            return redirect()->route('info.index')->with('success', 'Data informasi gereja berhasil diperbarui.');
+            return redirect()->back()->with('success', 'Data informasi gereja berhasil diperbarui.');
         } else {
-            return redirect()->route('info.edit', $id)->withErrors(['error' => 'Gagal memperbarui data informasi gereja.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal memperbarui data informasi gereja.']);
         }
     }
 
@@ -103,9 +106,9 @@ class GerejaController extends Controller
         $info = Gereja::findOrFail($id);
 
         if ($info->delete()) {
-            return redirect()->route('info.index')->with('success', 'Data informasi gereja berhasil dihapus.');
+            return redirect()->back()->with('success', 'Data informasi gereja berhasil dihapus.');
         } else {
-            return redirect()->route('info.index')->withErrors(['error' => 'Gagal menghapus data informasi gereja.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal menghapus data informasi gereja.']);
         }
     }
 }

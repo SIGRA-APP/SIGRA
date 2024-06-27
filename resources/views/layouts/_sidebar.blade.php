@@ -7,12 +7,12 @@
             <ul id="accordion-menu">
                 @if (Auth::user()->role == 'super-admin')
                 <li class="dropdown">
-                    <a href="{{ route('info.index') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ url('/' . $nama_gereja . '/info') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-house"></span><span class="mtext">Gereja</span>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="{{ route('list-admin.index') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ url('/' . $nama_gereja . '/list-admin') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-people-fill"></span><span class="mtext">Admin Gereja</span>
                     </a>
                 </li>
