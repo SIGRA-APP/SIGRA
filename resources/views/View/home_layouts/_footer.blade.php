@@ -9,7 +9,7 @@
 					<p style="text-align:justify;">Kami dengan senang hati menyambut Anda di GKII Sangkar NiHuta. Kami berkomitmen untuk melayani dengan penuh kasih dan dedikasi, serta menghadirkan pengalaman ibadah yang bermakna bagi setiap jemaat.</p>
                     @guest
                 <a class="nav-item" style="margin-left: 15px;">
-                    <a class="btn btn-primary" href="{{ url('login') }}" style="border-radius: 20px; background-color:black;">Login</a>
+                    <a class="btn btn-primary" href="{{ url('/' . $nama_gereja .'/login') }}" style="border-radius: 20px; background-color:black;">Login</a>
                 </a>
                 @endguest
                 @auth

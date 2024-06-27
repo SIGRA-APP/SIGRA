@@ -15,36 +15,42 @@ class InformasiGerejaController extends Controller
 
    
 
-    public function add()
+    public function add(Request $request)
     {
-        return view('admin.gereja.sejarah.add');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.gereja.sejarah.add',compact('nama_gereja'));
     }
 
-    public function add_bph()
+    public function add_bph(Request $request)
     {
-        return view('admin.gereja.bph.add');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.gereja.bph.add',compact('nama_gereja'));
     }
 
-    public function add_pendeta()
+    public function add_pendeta(Request $request)
     {
-        return view('admin.gereja.pendeta.add');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.gereja.pendeta.add',compact('nama_gereja'));
     }
 
-    public function list_bph()
+    public function list_bph(Request $request)
     {
         $bphs = BPHModel::where('gereja_id', Auth::user()->gereja_id)->get();
-        return view('admin.gereja.bph.list', compact('bphs'));
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.gereja.bph.list', compact('bphs','nama_gereja'));
     }
 
-    public function list_pendeta()
+    public function list_pendeta(Request $request)
     {
         $pendeta = PendetaModel::where('gereja_id', Auth::user()->gereja_id)->get();
-        return view('admin.gereja.pendeta.list', compact('pendeta'));
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.gereja.pendeta.list', compact('pendeta','nama_gereja'));
     }
 
-    public function overview_bph()
+    public function overview_bph(Request $request)
     {
-        return view('gereja.bph');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('gereja.bph',compact('nama_gereja'));
     }
 
 
@@ -76,21 +82,23 @@ class InformasiGerejaController extends Controller
         $bph->save();
 
         // Redirect ke halaman yang sesuai setelah data disimpan
-        return redirect()->route('bph.list')->with('success', 'BPH telah berhasil diunggah!');
+        return redirect()->back()->with('success', 'BPH telah berhasil diunggah!');
     }
 
     public function view_bph(Request $request)
     {
         $gereja =  $request->gereja;
         $data_bph = BPHModel::where('gereja_id', $gereja->id)->get();
-        return view('view.bph.bph', compact('data_bph')); // Kirimkan data BPH ke view
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('view.bph.bph', compact('data_bph',  'nama_gereja')); // Kirimkan data BPH ke view
     }
 
     public function view_gembala(Request $request)
     {
         $gereja = $request->gereja;
         $data_gembala = PendetaModel::where('gereja_id', $gereja->id)->get();
-        return view('view.bph.gembala', compact('data_gembala')); // Kirimkan data BPH ke view
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('view.bph.gembala', compact('data_gembala','nama_gereja')); // Kirimkan data BPH ke view
     }
 
 
@@ -121,7 +129,7 @@ class InformasiGerejaController extends Controller
         $pendeta->save();
 
         // Redirect ke halaman yang sesuai setelah data disimpan
-        return redirect()->route('pendeta.list')->with('success', 'Pendeta telah berhasil diunggah!');
+        return redirect()->back()->with('success', 'Pendeta telah berhasil diunggah!');
     }
 
 

@@ -14,11 +14,10 @@
                     <span class="user-name">{{ Auth::user()->username }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="dropdown-item" href="{{ url('/' . $nama_gereja . '/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="dw dw-logout"></i> Log Out
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ url('/' . $nama_gereja . '/logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </div>

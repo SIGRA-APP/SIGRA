@@ -8,24 +8,27 @@ use Illuminate\Support\Facades\Auth;
 
 class MingguanController extends Controller
 {
-    public function createmingguan()
+    public function createmingguan(Request $request)
     {
-        return view('admin.keuangan.persembahan.tambah_keuangan');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.keuangan.persembahan.tambah_keuangan',compact('nama_gereja'));
     }
 
     public function view_mingguan(Request $request)
     {
         $gereja = $request->gereja;
         $mingguan = MingguanModel::where('gereja_id', $gereja->id)->get();
-        return view('view.keuangan.mingguan', compact('mingguan'));
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('view.keuangan.mingguan', compact('mingguan','nama_gereja'));
     }
 
-    public function listmingguan()
+    public function listmingguan(Request $request)
     {
 
         $gereja = Auth::user()->gereja;
         $mingguan = MingguanModel::where('gereja_id', $gereja->id)->get();
-        return view('admin.keuangan.persembahan.list_keuangan', compact('mingguan'));
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.keuangan.persembahan.list_keuangan', compact('mingguan','nama_gereja'));
     }
 
     public function store(Request $request)
@@ -40,6 +43,6 @@ class MingguanController extends Controller
         $mingguan->gereja_id = Auth::user()->gereja->id;
         $mingguan->save();
     
-        return redirect()->route('listmingguan')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
 }

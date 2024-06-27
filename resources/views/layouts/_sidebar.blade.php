@@ -1,6 +1,6 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="{{url('/')}}" class="logo m-0 float-start">SIGRA<span class="text-primary">.</span></a>
+        <a href="{{ url('/' . $nama_gereja) }}" class="logo m-0 float-start">SIGRA<span class="text-primary">.</span></a>
     </div>
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
@@ -18,17 +18,17 @@
                 </li>
                 @endif
                 <li class="dropdown">
-                    <a href="{{url('home/tambah_home')}}" class="dropdown-toggle no-arrow">
+                    <a href="{{ url('/' . $nama_gereja . '/home/tambah_home') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-clipboard"></span><span class="mtext">Informasi</span>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="{{url('admin/warta/list_warta')}}" class="dropdown-toggle no-arrow">
+                    <a href="{{ url('/' . $nama_gereja . '/admin/warta/list_warta') }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-file-post"></span><span class="mtext">Warta Jemaat</span>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="{{ route('list_ayat') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('list_ayat', ['nama_gereja' => $nama_gereja]) }}" class="dropdown-toggle no-arrow">
                         <span class="micon bi bi-collection"></span><span class="mtext">Ayat Harian</span>
                     </a>
                 </li>
@@ -38,9 +38,9 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{{route('listmingguan')}}">Keuangan Mingguan</a>
+                            <a href="{{ route('listmingguan', ['nama_gereja' => $nama_gereja]) }}">Keuangan Mingguan</a>
                         </li>
-                        <li><a href="{{route('listbulanan')}}">Arus Kas Bulanan</a></li>
+                        <li><a href="{{ route('listbulanan', ['nama_gereja' => $nama_gereja]) }}">Arus Kas Bulanan</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -49,9 +49,9 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{{route('listupcoming')}}">Upcoming</a>
+                            <a href="{{ route('listupcoming', ['nama_gereja' => $nama_gereja]) }}">Upcoming</a>
                         </li>
-                        <li><a href="{{ route('listAcara') }}">Ibadah Raya</a></li>
+                        <li><a href="{{ route('listAcara', ['nama_gereja' => $nama_gereja]) }}">Ibadah Raya</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -60,18 +60,15 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{{url('admin/gereja/sejarah/add')}}">Sejarah</a>
+                            <a href="{{ url('/' . $nama_gereja . '/admin/gereja/sejarah/add') }}">Sejarah</a>
                         </li>
-                        <li><a href="{{url('admin/gereja/pendeta/list')}}">Struktural (Pendeta)</a></li>
-                        <li><a href="{{url('admin/gereja/bph/list')}}">Struktural (BPH dan Rekan)</a></li>
+                        <li><a href="{{ url('/' . $nama_gereja . '/admin/gereja/pendeta/list') }}">Struktural (Pendeta)</a></li>
+                        <li><a href="{{ url('/' . $nama_gereja . '/admin/gereja/bph/list') }}">Struktural (BPH dan Rekan)</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
-
-
-
 </div>
 <div class="mobile-menu-overlay"></div>
 

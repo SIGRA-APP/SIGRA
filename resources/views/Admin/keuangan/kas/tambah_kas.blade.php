@@ -38,7 +38,7 @@
                             <br>
                         </div>
                     </div>
-                    <form method="post" action="{{ route('store.bulanan') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ url('/' . $nama_gereja . '/admin/keuangan/bulanan/tambah_bulanan') }}" enctype="multipart/form-data">
                     @csrf
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-2 col-form-label">Bulan</label>

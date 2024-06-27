@@ -41,7 +41,7 @@
                         <br>
                     </div>
                 </div>
-                <form method="post" action="{{ route('acara.upcoming.tambah_upcoming') }}" enctype="multipart/form-data">
+                <form method="post" href="{{ url('/' . $nama_gereja . '/admin/acara/upcoming/tambah_upcoming') }}"  enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Judul / Keterangan</label>

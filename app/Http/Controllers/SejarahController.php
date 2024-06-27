@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class SejarahController extends Controller
 {
-    public function view()
+    public function view(Request $request)
     {
-
-        return view('admin.gereja.sejarah.add');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.gereja.sejarah.add',compact('nama_gereja'));
     }
 
     public function store(Request $request)
@@ -69,6 +69,7 @@ class SejarahController extends Controller
     {
         $gereja = $request->gereja;
         $sejarah = SejarahModel::where('gereja_id', $gereja->id)->get();
-        return view('view.sejarah.sejarah', compact('sejarah'));
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('view.sejarah.sejarah', compact('sejarah','nama_gereja'));
     }
 }

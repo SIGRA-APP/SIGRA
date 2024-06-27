@@ -17,17 +17,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\CheckGereja;
 
-// Home Route
-Route::get('/', [HomeController::class, 'view_home'])->name('home');
-
 
 // Auth Routes
-Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('login', [AuthController::class, 'login']);
+Route::get('/', [AuthController::class, 'showLoginFormSA'])->name('login');
+Route::post('login', [AuthController::class, 'loginSA']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
+
 // Dynamic Routes Based on Church Name
-Route::prefix('{nama_gereja}')->group(function () {
+Route::prefix('{nama_gereja}')->middleware(CheckGereja::class)->group(function () {
+
+    // Auth Routes
+    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+    // Home Route
+    Route::get('/', [HomeController::class, 'view_home'])->name('home');
 
     // Sejarah Route
     Route::get('sejarah', [SejarahController::class, 'sejarah']);

@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class ayatController extends Controller
 {
 
-    public function list_ayat()
+    public function list_ayat(Request $request)
     {
+        $nama_gereja = $request->gereja->nama_gereja; 
         $ayat = AyatHarianModel::where('gereja_id', Auth::user()->gereja_id)->get();
-        return view('admin.ayat_harian.list_ayat', compact('ayat'));
+        return view('admin.ayat_harian.list_ayat', compact('ayat','nama_gereja'));
     }
 
     public function view_ayat(Request $request)
@@ -22,19 +23,22 @@ class ayatController extends Controller
         $gereja = $request->gereja;
         // Mengambil semua data ayat
         $ayat = AyatHarianModel::where('gereja_id', $gereja->id)->get();
+        $nama_gereja = $gereja->nama_gereja; 
         // Mengirim data ayat ke view
-        return view('view.postingan.ayat',compact('ayat'));
+        return view('view.postingan.ayat',compact('ayat','nama_gereja'));
     }
 
 
-    public function edit_ayat()
+    public function edit_ayat(Request $request)
     {
-        return view('admin.ayat_harian.edit_ayat');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.ayat_harian.edit_ayat', compact('nama_gereja'));
     }
 
-    public function tambah_ayat()
+    public function tambah_ayat(Request $request)
     {
-        return view('admin.ayat_harian.tambah_ayat');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.ayat_harian.tambah_ayat',compact('nama_gereja'));
     }
 
     public function uploadAyat(Request $request)
@@ -72,7 +76,7 @@ class ayatController extends Controller
         $ayat->save();
 
         // Redirect atau tindakan lain setelah berhasil upload
-        return redirect()->route('list_ayat')->with('success', 'Ayat telah berhasil diunggah!');
+        return redirect()->back()->with('success', 'Ayat telah berhasil diunggah!');
     }
 
 
@@ -80,7 +84,8 @@ class ayatController extends Controller
     {
         $gereja =  $request->gereja;
         $ayats = AyatHarianModel::where('gereja_id',$gereja->id)->get();
-        return view('view.postingan.ayat_single', compact('ayats'));
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('view.postingan.ayat_single', compact('ayats','nama_gereja'));
     }
 
 }

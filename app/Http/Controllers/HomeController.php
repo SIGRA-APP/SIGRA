@@ -13,20 +13,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function view_home()
+    public function view_home(Request $request)
     {
         
         try {
-            $data_home = HomeModel::firstOrFail();
-            return view('view.home.home', compact('data_home'));
+            $gereja = $request->gereja;
+            $data_home = HomeModel::where('gereja_id',$gereja->id);
+            $nama_gereja = $gereja->nama_gereja; 
+            return view('view.home.home', compact('data_home', 'nama_gereja'));
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return redirect()->route('error.page')->with('error', 'Home data not found');
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.home.tambah_home');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.home.tambah_home', compact('nama_gereja'));
     }
 
     /**
@@ -57,6 +60,6 @@ class HomeController extends Controller
         $home->gereja_id = Auth::user()->gereja->id;
         $home->save();
 
-        return redirect()->route('landing')->with('success', 'Data berhasil disimpan.');
+        return redirect()->back()->with('success', 'Data berhasil disimpan.');
     }
 }

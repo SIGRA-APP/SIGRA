@@ -5,24 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\BulananModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class BulananController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.keuangan.kas.tambah_kas');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.keuangan.kas.tambah_kas', compact('nama_gereja'));
     }
 
-    public function view_bulanan()
+    public function view_bulanan(Request $request)
     {
-        $bulanan = BulananModel::all();
-        return view('view.keuangan.bulanan', compact('bulanan'));
+        $gereja = $request->gereja;
+        $bulanan = BulananModel::where('gereja_id', $gereja->id)->get();
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('view.keuangan.bulanan', compact('bulanan','nama_gereja'));
     }
 
-    public function listbulanan()
+    public function listbulanan(Request $request)
     {
-        $bulanan = BulananModel::all();
-        return view('admin.keuangan.kas.list_kas', compact('bulanan'));
+        $bulanan = BulananModel::where('gereja_id', Auth::user()->gereja_id)->get();
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.keuangan.kas.list_kas', compact('bulanan','nama_gereja'));
     }
 
     public function store(Request $request)
@@ -43,6 +48,6 @@ class BulananController extends Controller
 
         Log::info('Data saved successfully'); // Log ini untuk memastikan data berhasil disimpan
 
-        return redirect()->route('listbulanan')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
 }

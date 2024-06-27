@@ -16,24 +16,28 @@ class WartaController extends Controller
     {
         $gereja = Auth::user()->gereja;
         $wartas = WartaModel::where('gereja_id', $gereja->id)->get();
-        return view('admin.warta.list_warta', compact('wartas'));
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('admin.warta.list_warta', compact('wartas','nama_gereja'));
     }
 
     public function view_warta(Request $request)
     {
         $gereja = $request->gereja;
         $warta = WartaModel::where('gereja_id', $gereja->id)->get();
-        return view('view.postingan.warta', compact('warta'));
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('view.postingan.warta', compact('warta', 'nama_gereja'));
     }
 
     public function listWarta(Request $request)
     {
-        return view('admin.warta.list_warta');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.warta.list_warta', compact('nama_gereja'));
     }
 
-    public function tambah_warta()
+    public function tambah_warta(Request $request)
     {
-        return view('admin.warta.tambah_warta');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.warta.tambah_warta', compact('nama_gereja'));
     }
 
     public function simpan_warta(Request $request)
@@ -106,7 +110,7 @@ class WartaController extends Controller
     
         $warta->save();
     
-        return redirect()->route('list_warta')->with('success', 'Warta berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Warta berhasil ditambahkan');
     }
     
 
@@ -114,6 +118,7 @@ class WartaController extends Controller
     {
         $gereja = $request->gereja;
         $wartas = WartaModel::where('gereja_id', $gereja->id)->get();
-        return view('view.postingan.warta_single', compact('wartas'));
+        $nama_gereja = $gereja->nama_gereja;
+        return view('view.postingan.warta_single', compact('wartas', 'nama_gereja'));
     }
 }

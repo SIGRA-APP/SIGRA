@@ -15,7 +15,7 @@
 <div class="card-box mb-30">
     <div class="pd-20">
         <h4 class="text-blue h4">List Upcoming Event</h4>
-        <a href="{{route('tambah_upcoming')}}" class="btn btn-primary pull-right"
+        <a href="{{ url('/' . $nama_gereja . '/admin/acara/upcoming/tambah_upcoming') }}" class="btn btn-primary pull-right"
             style="float: right; margin-top: -5px; margin-bottom:8px;"> Buat Baru</a>
     </div>
 

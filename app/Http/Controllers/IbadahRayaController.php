@@ -10,24 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class IbadahRayaController extends Controller
 {
-    public function listAcara()
+    public function listAcara(Request $request)
     {
         $acara = IbadahRayaModel::where('gereja_id', Auth::user()->gereja_id)->get();
-        return view('admin.acara.ibadah_raya.list_acara', compact('acara'));
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.acara.ibadah_raya.list_acara', compact('acara','nama_gereja'));
     }
 
     public function view_raya(Request $request)
     {
         $gereja = $request->gereja;
         $raya = IbadahRayaModel::where('gereja_id', $gereja->id)->get();
-        return view('view.acara.ibadah_raya', compact('raya'));
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('view.acara.ibadah_raya', compact('raya','nama_gereja'));
     }
 
 
 
-    public function tambahAcara()
+    public function tambahAcara(Request $request)
     {
-        return view('admin.acara.ibadah_raya.tambah_acara');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.acara.ibadah_raya.tambah_acara', compact('nama_gereja'));
     }
 
     public function insertIbadah(Request $request)
@@ -70,13 +73,14 @@ class IbadahRayaController extends Controller
         $ibadahRaya->save();
 
         // Redirect atau response sesuai kebutuhan
-        return redirect()->route('listAcara')->with('success', 'Data ibadah raya berhasil disimpan.');
+        return redirect()->back()->with('success', 'Data ibadah raya berhasil disimpan.');
     }
 
     public function ibadah_raya_single(Request $request)
     {
         $gereja = $request->gereja;
         $raya = IbadahRayaModel::where('gereja_id', $gereja->id)->get();
-        return view('view.acara.ibadah_raya_single', compact('raya'));
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('view.acara.ibadah_raya_single', compact('raya','nama_gereja'));
     }
 }

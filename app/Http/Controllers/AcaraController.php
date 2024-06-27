@@ -9,28 +9,32 @@ use Illuminate\Support\Facades\Auth;
 
 class AcaraController extends Controller
 {
-    public function upcoming()
+    public function upcoming(Request $request)
     {
-        return view('acara.upcoming');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('acara.upcoming',compact('nama_gereja'));
     }
 
     public function view_upcoming(Request $request)
     {
         $gereja = $request->gereja;
         $upcoming = UpcomingModel::where('gereja_id', $gereja->id)->get();
-        return view('view.acara.akan_datang', compact('upcoming')); // Kirimkan data BPH ke view
+        $nama_gereja = $gereja->nama_gereja; 
+        return view('view.acara.akan_datang', compact('upcoming', 'nama_gereja')); // Kirimkan data BPH ke view
     }
 
     //untuk view tambah upcoming
-    public function tambah_upcoming()
+    public function tambah_upcoming(Request $request)
     {
-        return view('admin.acara.upcoming.tambah_acara');
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.acara.upcoming.tambah_acara',compact('nama_gereja'));
     }
 
-    public function listupcoming()
+    public function listupcoming(Request $request)
     {
-        $upcomingEvents = UpcomingModel::where('gereja_id', Auth::user()->gereja_id)->get();;
-        return view('admin.acara.upcoming.list_acara', compact('upcomingEvents'));
+        $upcomingEvents = UpcomingModel::where('gereja_id', Auth::user()->gereja_id)->get();
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('admin.acara.upcoming.list_acara', compact('upcomingEvents','nama_gereja'));
     }
 
     //masukkan data ke database
@@ -71,7 +75,7 @@ class AcaraController extends Controller
         $acara->save();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('listupcoming')->with('success', 'Upcoming berhasil ditambahkan!');
+        return redirect()->back()->with('success', 'Upcoming berhasil ditambahkan!');
     }
 
     public function update_upcoming(Request $request, $id)
@@ -106,7 +110,7 @@ class AcaraController extends Controller
         $acara->save();
 
         // Redirect dengan pesan sukses
-        return redirect()->route('acara.upcoming.list_acara')->with('success', 'Acara berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Acara berhasil diperbarui!');
     }
 
 
@@ -131,7 +135,8 @@ class AcaraController extends Controller
     {
         $gereja =  $request->gereja;
         $upcomings = UpcomingModel::where('gereja_id', $gereja->id)->get();
-        return view('view.acara.akan_datang_single', compact('upcomings'));
+        $nama_gereja = $request->gereja->nama_gereja; 
+        return view('view.acara.akan_datang_single', compact('upcomings','nama_gereja'));
     }
 }
 
