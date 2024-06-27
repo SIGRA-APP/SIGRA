@@ -57,8 +57,22 @@ Route::prefix('{nama_gereja}')->middleware(CheckGereja::class)->group(function (
         // Informasi Gereja Route
         Route::resource('info', GerejaController::class);
 
+        // Route to display a specific resource
+
+        Route::get('/info/{id}/edit', [GerejaController::class, 'edit']);
+
+        Route::post('/info/{id}', [GerejaController::class, 'update']);
+
+        Route::post('/info/{info}', [GerejaController::class, 'destroy']);
+
         // Admin Gereja Route
         Route::resource('list-admin', AdminController::class);
+
+        Route::get('/list-admin/{id}/edit', [GerejaController::class, 'edit']);
+
+        Route::post('/list-admin/{id}', [GerejaController::class, 'update']);
+
+        Route::post('/list-admin/{info}', [GerejaController::class, 'destroy']);
 
         Route::get('landing', [AuthController::class, 'landing'])->name('landing');
 
