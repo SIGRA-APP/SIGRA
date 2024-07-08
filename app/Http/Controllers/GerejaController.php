@@ -46,6 +46,7 @@ class GerejaController extends Controller
         $info->sesi = $validatedData['sesi'];
         $info->kontak = $validatedData['kontak'];
 
+
         if ($info->save()) {
             return redirect()->back()->with('success', 'Data informasi gereja berhasil disimpan.');
         } else {
