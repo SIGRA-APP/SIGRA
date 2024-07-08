@@ -6,22 +6,22 @@
 @section('content')
 
 @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 
 <style>
     .small-text {
-        font-size: 12px; /* Atur ukuran font sesuai kebutuhan */
+        font-size: 12px;
+        /* Atur ukuran font sesuai kebutuhan */
     }
 </style>
 <!-- Simple Datatable start -->
 <div class="card-box mb-30">
     <div class="pd-20">
         <h4 class="text-blue h4">Data Arus Kas Bulanan</h4>
-        <a href="{{ url('/' . $nama_gereja . '/admin/keuangan/bulanan/tambah_bulanan') }}" class="btn btn-primary pull-right"
-            style="float: right; margin-top: -5px; margin-bottom:8px;">Buat Baru</a>
+        <a href="{{ url('/' . $nama_gereja . '/admin/keuangan/bulanan/tambah_bulanan') }}" class="btn btn-primary pull-right" style="float: right; margin-top: -5px; margin-bottom:8px;">Buat Baru</a>
     </div>
 
     <div class="table-responsive">
@@ -36,12 +36,12 @@
             </thead>
             <tbody>
                 @foreach ($bulanan as $index => $item)
-                    <tr>
-                        <th scope="row">{{ $index + 1 }}</th>
-                        <td>{{ $item->bulan }}</td>
-                        <td>{{ $item->tahun }}</td>
-                        <td>{{ $item->jumlah }}</td>
-                    </tr>
+                <tr>
+                    <th scope="row">{{ $index + 1 }}</th>
+                    <td>{{ $item->bulan }}</td>
+                    <td>{{ $item->tahun }}</td>
+                    <td>{{ $item->jumlah }}</td>
+                </tr>
                 @endforeach
             </tbody>
         </table>

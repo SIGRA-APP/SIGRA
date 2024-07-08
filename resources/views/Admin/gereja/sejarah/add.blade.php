@@ -60,55 +60,56 @@
                         <label class="col-sm-12 col-md-2 col-form-label">Gambar Gereja</label>
                         <div class="col-sm-12 col-md-10">
                             <input class="form-control" type="file" name="gambar_gereja" />
+                            @if(isset($sejarah->gambar_gereja))
+                            <img src="{{ asset('storage/' . $sejarah->gambar_gereja) }}" alt="Gambar Gereja" width="100">
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Tanggal Dibuat</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="date" name="tanggal_dibuat" placeholder="" />
+                            <input class="form-control" type="date" name="tanggal_dibuat" value="{{ $sejarah->tanggal_dibuat ?? '' }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Judul</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" name="judul" placeholder="Sejarah Gereja HKBP" />
+                            <input class="form-control" type="text" name="judul" value="{{ $sejarah->judul ?? 'Sejarah Gereja HKBP' }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Nama Gereja</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" name="nama_gereja" placeholder="Gereja HKBP" />
+                            <input class="form-control" type="text" name="nama_gereja" value="{{ $nama_gereja }}" disabled />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Didirikan</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="date" name="kapan_didirikan" placeholder="Gereja HKBP" />
+                            <input class="form-control" type="date" name="kapan_didirikan" value="{{ $sejarah->kapan_didirikan ?? '' }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Pendiri</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" name="pendiri" placeholder="Augus Theis" />
+                            <input class="form-control" type="text" name="pendiri" value="{{ $sejarah->pendiri ?? 'Augus Theis' }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Lokasi</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" name="lokasi" placeholder="Jl. ABC DEF" />
+                            <input class="form-control" type="text" name="lokasi" value="{{ $sejarah->lokasi ?? 'Jl. ABC DEF' }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Kutipan</label>
                         <div class="col-sm-12 col-md-10">
-                            <input class="form-control" type="text" name="kutipan"
-                                placeholder="Gereja HKBP adalah gereja yang ...." />
+                            <input class="form-control" type="text" name="kutipan" value="{{ $sejarah->kutipan ?? $data_home->gereja->kutipan }}" />
                         </div>
                     </div>
                     <div class="col-12">
                         <label class="form-label"><strong>Buat Detail Sejarah</strong></label>
-                        <textarea class="form-control tinymce-editor" name="description"
-                            placeholder="Masukkan detail persembahan..."></textarea>
+                        <textarea class="form-control tinymce-editor" name="description">{{ $sejarah->description ?? '' }}</textarea>
                     </div>
                     <hr>
                     <div class="text-center">

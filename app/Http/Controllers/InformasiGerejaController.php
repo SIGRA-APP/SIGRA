@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BPHModel;
 use App\Models\PendetaModel;
 use App\Models\Gereja;
+use App\Models\HomeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -89,16 +90,18 @@ class InformasiGerejaController extends Controller
     {
         $gereja =  $request->gereja;
         $data_bph = BPHModel::where('gereja_id', $gereja->id)->get();
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
         $nama_gereja = $gereja->nama_gereja; 
-        return view('view.bph.bph', compact('data_bph',  'nama_gereja')); // Kirimkan data BPH ke view
+        return view('view.bph.bph', compact('data_bph','data_home', 'nama_gereja')); // Kirimkan data BPH ke view
     }
 
     public function view_gembala(Request $request)
     {
         $gereja = $request->gereja;
         $data_gembala = PendetaModel::where('gereja_id', $gereja->id)->get();
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
         $nama_gereja = $gereja->nama_gereja; 
-        return view('view.bph.gembala', compact('data_gembala','nama_gereja')); // Kirimkan data BPH ke view
+        return view('view.bph.gembala', compact('data_gembala','nama_gereja','data_home')); // Kirimkan data BPH ke view
     }
 
 
@@ -127,6 +130,7 @@ class InformasiGerejaController extends Controller
         }
 
         $pendeta->save();
+        
 
         // Redirect ke halaman yang sesuai setelah data disimpan
         return redirect()->back()->with('success', 'Pendeta telah berhasil diunggah!');

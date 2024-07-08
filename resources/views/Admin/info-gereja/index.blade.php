@@ -32,7 +32,7 @@
                 @foreach ($gereja as $inf)
                 <tr>
                     <td class="table-plus">{{ $inf->id }}</td>
-                    <td>{{ $inf->nama_gereja }}</td>
+                    <td><a class="text-info" href="{{ url('/' . $inf->nama_gereja) }}">{{$inf->nama_gereja }}</a></td>
                     <td>{{ $inf->kutipan }}</td>
                     <td>{{ $inf->online }}</td>
                     <td>{{ $inf->sesi }}</td>
@@ -40,13 +40,10 @@
                     <td>
                         <div class="d-flex">
                             <div class="btn-1">
-                                <a             
-                                href="{{ url('/' . $nama_gereja . '/info/' . $inf->id . '/edit') }}"
-
-                                class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ url('/' . $inf->nama_gereja . '/info/' . $inf->id . '/edit') }}" class="btn btn-sm btn-primary">Edit</a>
                             </div> &nbsp;&nbsp;&nbsp;
                             <div class="btn-2">
-                                <form action="{{ url('/' . $nama_gereja . '/info/' . $inf->id . '/destroy') }}" method="POST" style="display:inline-block;">
+                                <form action="{{ url('/' . $inf->nama_gereja . '/info/' . $inf->id . '/destroy') }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Hapus</button>

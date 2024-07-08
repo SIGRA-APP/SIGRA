@@ -8,7 +8,22 @@
     <div class="pd-20">
         <h4 class="text-blue h4">Edit Arus Kas</h4>
     </div>
-    <form method="POST" action="{{ route('update_kas', $aruskas->id) }} enctype="multipart/form-data">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <form method="POST" action="{{ route('update_kas', $aruskas->id) }} enctype=" multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group row">

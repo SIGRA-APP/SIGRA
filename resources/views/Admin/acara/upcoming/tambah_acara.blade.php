@@ -41,7 +41,22 @@
                         <br>
                     </div>
                 </div>
-                <form method="post" href="{{ url('/' . $nama_gereja . '/admin/acara/upcoming/tambah_upcoming') }}"  enctype="multipart/form-data">
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <form method="post" href="{{ url('/' . $nama_gereja . '/admin/acara/upcoming/tambah_upcoming') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Judul / Keterangan</label>

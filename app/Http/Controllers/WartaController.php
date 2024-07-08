@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gereja;
 use App\Models\Warta;
 use App\Models\WartaModel;
+use App\Models\HomeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,8 @@ class WartaController extends Controller
         $gereja = $request->gereja;
         $warta = WartaModel::where('gereja_id', $gereja->id)->get();
         $nama_gereja = $gereja->nama_gereja; 
-        return view('view.postingan.warta', compact('warta', 'nama_gereja'));
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.postingan.warta', compact('warta', 'nama_gereja','data_home'));
     }
 
     public function listWarta(Request $request)
@@ -119,6 +121,7 @@ class WartaController extends Controller
         $gereja = $request->gereja;
         $wartas = WartaModel::where('gereja_id', $gereja->id)->get();
         $nama_gereja = $gereja->nama_gereja;
-        return view('view.postingan.warta_single', compact('wartas', 'nama_gereja'));
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.postingan.warta_single', compact('wartas', 'nama_gereja','data_home'));
     }
 }

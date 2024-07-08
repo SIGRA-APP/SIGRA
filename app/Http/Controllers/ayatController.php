@@ -6,6 +6,7 @@ use App\Models\AyatHarianModel;
 use App\Models\Gereja;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\HomeModel;
 use Illuminate\Support\Facades\Auth;
 
 class ayatController extends Controller
@@ -23,9 +24,10 @@ class ayatController extends Controller
         $gereja = $request->gereja;
         // Mengambil semua data ayat
         $ayat = AyatHarianModel::where('gereja_id', $gereja->id)->get();
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
         $nama_gereja = $gereja->nama_gereja; 
         // Mengirim data ayat ke view
-        return view('view.postingan.ayat',compact('ayat','nama_gereja'));
+        return view('view.postingan.ayat',compact('ayat','nama_gereja','data_home'));
     }
 
 
@@ -85,7 +87,8 @@ class ayatController extends Controller
         $gereja =  $request->gereja;
         $ayats = AyatHarianModel::where('gereja_id',$gereja->id)->get();
         $nama_gereja = $request->gereja->nama_gereja; 
-        return view('view.postingan.ayat_single', compact('ayats','nama_gereja'));
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.postingan.ayat_single', compact('ayats','nama_gereja','data_home'));
     }
 
 }

@@ -41,7 +41,8 @@
 					<div class="content">
 						<h4 class="mt-4 mb-2 title-color">{{$value->judul}}</h4>
 						<p class="mb-4">{{ Illuminate\Support\Str::words($value->deskripsi, 25, '...') }}</p>
-						<a href="{{url('view/postingan/warta_single')}}" class="read-more">Selengkapnya  <i class="icofont-simple-right ml-2"></i></a>
+						<a href= "{{ url('/' . $nama_gereja . '/view/postingan/warta_single') }}"
+						class="read-more">Selengkapnya  <i class="icofont-simple-right ml-2"></i></a>
 					</div>
 				</div>
 			</div>

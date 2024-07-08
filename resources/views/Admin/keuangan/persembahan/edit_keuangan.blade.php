@@ -15,8 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{url('vendors/styles/core.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{url('vendors/styles/icon-font.min.css')}}" />
@@ -24,8 +23,7 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
-        crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258" crossorigin="anonymous"></script>
     <!-- End Google Tag Manager -->
 </head>
 
@@ -135,29 +133,42 @@
                             <br>
                         </div>
                     </div>
-                    <form method="post" enctype ="multipart/form-data">
+                    @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    @endif
 
-                    {{ csrf_field() }}
-                        <div class="form-group row" action="" >
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    <form method="post" enctype="multipart/form-data">
+
+                        {{ csrf_field() }}
+                        <div class="form-group row" action="">
                             <label class="col-sm-12 col-md-2 col-form-label">Judul / Keterangan</label>
-                            <div class="col-sm-12 col-md-10" >
-                                <input class="form-control" type="text" name="judul"  value="" required />
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control" type="text" name="judul" value="" required />
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-2 col-form-label">Minggu</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" name="minggu" type="text"
-                                    required />
+                                <input class="form-control" name="minggu" type="text" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Tangal
                                 dan Waktu</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control datetimepicker" name="tanggal" placeholder="Pilih tanggal"
-                                    type="text" />
+                                <input class="form-control datetimepicker" name="tanggal" placeholder="Pilih tanggal" type="text" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -174,8 +185,7 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label"><strong>Detail Persembahan</strong></label>
-                            <textarea class="form-control tinymce-editor" name="detail_persembahan"
-                                placeholder="Masukkan detail persembahan..."></textarea>
+                            <textarea class="form-control tinymce-editor" name="detail_persembahan" placeholder="Masukkan detail persembahan..."></textarea>
                         </div>
                         <hr>
                         <div class="text-center">
@@ -207,10 +217,9 @@
                 <script src="{{url('assets/assets/js/backmain.js')}}"></script>
                 <script src="{{url('assets/assets/tagsinput/bootstrap-tagsinput.js')}}"></script>
                 <script type="text/javascript">
-                <!-- Google Tag Manager (noscript)
-                -->
-                <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
-                        style="display: none; visibility: hidden"></iframe></noscript>
+                    <!-- Google Tag Manager (noscript)
+                    -->
+                <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
                 <!-- End Google Tag Manager (noscript) -->
 </body>
 

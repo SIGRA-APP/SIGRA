@@ -6,6 +6,7 @@ use App\Models\UpcomingModel;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Models\HomeModel;
 
 class AcaraController extends Controller
 {
@@ -20,7 +21,8 @@ class AcaraController extends Controller
         $gereja = $request->gereja;
         $upcoming = UpcomingModel::where('gereja_id', $gereja->id)->get();
         $nama_gereja = $gereja->nama_gereja; 
-        return view('view.acara.akan_datang', compact('upcoming', 'nama_gereja')); // Kirimkan data BPH ke view
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.acara.akan_datang', compact('upcoming', 'nama_gereja', 'data_home')); // Kirimkan data BPH ke view
     }
 
     //untuk view tambah upcoming
@@ -136,7 +138,8 @@ class AcaraController extends Controller
         $gereja =  $request->gereja;
         $upcomings = UpcomingModel::where('gereja_id', $gereja->id)->get();
         $nama_gereja = $request->gereja->nama_gereja; 
-        return view('view.acara.akan_datang_single', compact('upcomings','nama_gereja'));
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.acara.akan_datang_single', compact('upcomings','nama_gereja','data_home'));
     }
 }
 

@@ -13,7 +13,7 @@
                 <div class="block">
                     <div class="divider mb-3"></div>
                     <span class="text-uppercase text-sm letter-spacing "><strong>Melayani bukan Dilayani</strong></span>
-                    <h1 class="mb-3 mt-3">Selamat Datang di GKII Sangkar NiHuta</h1>
+                    <h1 class="mb-3 mt-3">Selamat Datang di {{$nama_gereja}}</h1>
 
                     <p class="mb-4 pr-5"><strong>Kami dengan senang hati menyambut Anda di GKII Sangkar NiHuta. Kami berkomitmen untuk melayani dengan penuh kasih dan dedikasi, serta menghadirkan pengalaman ibadah yang bermakna bagi setiap jemaat.</strong></p>
                     <div class="btn-container ">
@@ -35,10 +35,10 @@
                         </div>
                         <span>Ibadah Online</span>
                         <h4 class="mb-3">Ibadah Online</h4>
-                        @foreach($data_home as $data)
                         <li class="d-flex justify-content-between">Youtube :
-                                <span></span>{{$data->youtube}}</li>
-                        @endforeach
+                            <span></span>
+                            <a href="{{$data_home->link}}" target="_blank">{{$data_home->gereja->online}}</a>
+                        </li>
 
                     </div>
 
@@ -49,14 +49,14 @@
                         <span>Waktu Ibadah</span>
                         <h4 class="mb-3">Sesi Ibadah</h4>
                         <ul class="w-hours list-unstyled">
-                        @foreach($data_home as $data)
                             <li class="d-flex justify-content-between">Pagi :
-                                <span></span>{{ substr($data->jam_mulai_pagi, 0, 5) }} -
-                                {{ substr($data->jam_selesai_pagi, 0, 5) }}</li>
+                                <span></span>{{ substr($data_home->jam_mulai_pagi, 0, 5) }} -
+                                {{ substr($data_home->jam_selesai_pagi, 0, 5) }}
+                            </li>
                             <li class="d-flex justify-content-between">Siang :
-                                <span>{{ substr($data->jam_mulai_siang, 0, 5) }} -
-                                    {{ substr($data->jam_selesai_siang, 0, 5) }}</span></li>
-                        @endforeach
+                                <span>{{ substr($data_home->jam_mulai_siang, 0, 5) }} -
+                                    {{ substr($data_home->jam_selesai_siang, 0, 5) }}</span>
+                            </li>
                         </ul>
                     </div>
                     <div class="feature-item mb-5 mb-lg-0">
@@ -66,12 +66,12 @@
                         <span>Informasi Lebih Lanjut</span>
                         <h4 class="mb-3">Contact Person</h4>
                         <ul class="w-hours list-unstyled">
-                        @foreach($data_home as $data)
-                            <li class="d-flex justify-content-between">Telepon  :
-                                <span></span>{{$data->no_telp}}</li>
-                            <li class="d-flex justify-content-between">Email    :
-                                <span>{{$data->email}}</span></li>
-                        @endforeach
+                            <li class="d-flex justify-content-between">Telepon :
+                                <span></span>{{$data_home->no_telp}}
+                            </li>
+                            <li class="d-flex justify-content-between">Email :
+                                <span>{{$data_home->email}}</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -84,18 +84,17 @@
     <div class="container">
         <div class="cta position-relative">
             <div class="row">
-            @foreach ($data_home as $data)
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter-stat">
                         <i class="icofont-doctor"></i>
-                        <span class="h3">{{$data->kartu_keluarga}}</span>KK
+                        <span class="h3">{{$data_home->kartu_keluarga}}</span>KK
                         <p>Kartu Keluarga</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter-stat">
                         <i class="icofont-doctor"></i>
-                        <span class="h3">{{$data->total_jemaat}}</span>+
+                        <span class="h3">{{$data_home->total_jemaat}}</span>+
                         <p>Jemaat</p>
                     </div>
                 </div>
@@ -103,18 +102,17 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter-stat">
                         <i class="icofont-doctor"></i>
-                        <span class="h3">{{$data->total_bph}}</span>+
+                        <span class="h3">{{$data_home->total_bph}}</span>+
                         <p>BPH</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter-stat">
                         <i class="icofont-doctor"></i>
-                        <span class="h3">{{$data->total_pendeta}}</span>+
+                        <span class="h3">{{$data_home->total_pendeta}}</span>+
                         <p>Pendeta / Gembala</p>
                     </div>
                 </div>
-            @endforeach
             </div>
         </div>
     </div>

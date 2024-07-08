@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MingguanModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\HomeModel;
 
 class MingguanController extends Controller
 {
@@ -19,7 +20,8 @@ class MingguanController extends Controller
         $gereja = $request->gereja;
         $mingguan = MingguanModel::where('gereja_id', $gereja->id)->get();
         $nama_gereja = $gereja->nama_gereja; 
-        return view('view.keuangan.mingguan', compact('mingguan','nama_gereja'));
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.keuangan.mingguan', compact('mingguan','nama_gereja','data_home'));
     }
 
     public function listmingguan(Request $request)

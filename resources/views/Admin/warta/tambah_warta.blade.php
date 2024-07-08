@@ -33,6 +33,21 @@
                         <br>
                     </div>
                 </div>
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="post" enctype="multipart/form-data" action="{{ url('/' . $nama_gereja . '/admin/warta/simpan_warta') }}">
                     @csrf
                     <div class="form-group row">
@@ -213,7 +228,7 @@
                         const defaultGambarRadio = document.getElementById('defaultGambar');
                         const customGambarRadio = document.getElementById('customGambar');
                         const customGambarInput = document.querySelector('.custom-gambar');
-                
+
                         function toggleGambarInput() {
                             if (customGambarRadio.checked) {
                                 customGambarInput.style.display = 'block';
@@ -221,10 +236,10 @@
                                 customGambarInput.style.display = 'none';
                             }
                         }
-                
+
                         defaultGambarRadio.addEventListener('change', toggleGambarInput);
                         customGambarRadio.addEventListener('change', toggleGambarInput);
-                
+
                         toggleGambarInput(); // Initial call
                     });
                 </script>

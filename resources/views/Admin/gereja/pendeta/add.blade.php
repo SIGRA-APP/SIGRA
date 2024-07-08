@@ -38,7 +38,22 @@
                         <br>
                     </div>
                 </div>
-                <form method="post" action="" enctype="multipart/form-data">
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <form method="post" action="{{ url('/' . $nama_gereja . '/admin/gereja/pendeta/add') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Nama Pendeta</label>

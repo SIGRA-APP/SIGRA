@@ -39,51 +39,51 @@
                     </div>
                 </div>
                 <form method="post" action="" enctype="multipart/form-data">
-    @csrf
-    <div class="form-group row">
-        <label class="col-sm-12 col-md-2 col-form-label">Kegiatan</label>
-        <div class="col-sm-12 col-md-10">
-            <input class="form-control" type="text" name="kegiatan" placeholder="Partamiangan Minggu I" />
-        </div>
-    </div>
+                    @csrf
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Kegiatan</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" type="text" name="kegiatan" placeholder="Partamiangan Minggu I" />
+                        </div>
+                    </div>
 
-    <div class="form-group row">
-        <label class="col-sm-12 col-md-2 col-form-label">Petugas</label>
-        <div class="col-sm-12 col-md-10">
-            <input class="form-control" name="petugas" placeholder="Pdt. Agus Marpaung" type="text" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-12 col-md-2 col-form-label">Tempat</label>
-        <div class="col-sm-12 col-md-10">
-            <input class="form-control" name="tempat" placeholder="Rumah Inang M.Situmeang" type="text" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Tangal dan Waktu</label>
-        <div class="col-sm-12 col-md-10">
-            <input class="form-control datetimepicker" name="tanggal_waktu" placeholder="Pilih tanggal" type="text" />
-        </div>
-    </div>
-    <!-- <div class="form-group row">
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Petugas</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" name="petugas" placeholder="Pdt. Agus Marpaung" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Tempat</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control" name="tempat" placeholder="Rumah Inang M.Situmeang" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Tangal dan Waktu</label>
+                        <div class="col-sm-12 col-md-10">
+                            <input class="form-control datetimepicker" name="tanggal_waktu" placeholder="Pilih tanggal" type="text" />
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row">
             <label class="col-sm-12 col-md-2 col-form-label">Gambar</label>
             <div class="col-sm-12 col-md-10">
                 <input class="form-control" type="file" />
             </div>
         </div> -->
-    <div class="col-12">
-        <label class="form-label"><strong>Deskripsi Singkat</strong></label>
-        <textarea class="form-control" name="deskripsi_singkat" placeholder="Masukkan detail persembahan..."></textarea>
-    </div>
-    <hr>
-    <div class="text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</div>
-<!-- Default Basic Forms End -->
-</form>
+                    <div class="col-12">
+                        <label class="form-label"><strong>Deskripsi Singkat</strong></label>
+                        <textarea class="form-control" name="deskripsi_singkat" placeholder="Masukkan detail persembahan..."></textarea>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+            </div>
+            <!-- Default Basic Forms End -->
+            </form>
 
 
-@endsection
-@section('script')
-@endsection
+            @endsection
+            @section('script')
+            @endsection

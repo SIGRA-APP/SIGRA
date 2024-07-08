@@ -6,7 +6,7 @@ use App\Models\IbadahRayaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\HomeModel;
 
 class IbadahRayaController extends Controller
 {
@@ -22,7 +22,8 @@ class IbadahRayaController extends Controller
         $gereja = $request->gereja;
         $raya = IbadahRayaModel::where('gereja_id', $gereja->id)->get();
         $nama_gereja = $gereja->nama_gereja; 
-        return view('view.acara.ibadah_raya', compact('raya','nama_gereja'));
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.acara.ibadah_raya', compact('raya','nama_gereja','data_home'));
     }
 
 
@@ -81,6 +82,7 @@ class IbadahRayaController extends Controller
         $gereja = $request->gereja;
         $raya = IbadahRayaModel::where('gereja_id', $gereja->id)->get();
         $nama_gereja = $request->gereja->nama_gereja; 
-        return view('view.acara.ibadah_raya_single', compact('raya','nama_gereja'));
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.acara.ibadah_raya_single', compact('raya','nama_gereja','data_home'));
     }
 }

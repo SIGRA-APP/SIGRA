@@ -6,6 +6,7 @@ use App\Models\BulananModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Models\HomeModel;   
 
 class BulananController extends Controller
 {
@@ -20,7 +21,8 @@ class BulananController extends Controller
         $gereja = $request->gereja;
         $bulanan = BulananModel::where('gereja_id', $gereja->id)->get();
         $nama_gereja = $gereja->nama_gereja; 
-        return view('view.keuangan.bulanan', compact('bulanan','nama_gereja'));
+        $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
+        return view('view.keuangan.bulanan', compact('bulanan','nama_gereja','data_home'));
     }
 
     public function listbulanan(Request $request)

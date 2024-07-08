@@ -24,22 +24,22 @@
 
 
 <section class="section service-2">
-	<div class="container">
+  <div class="container">
 
-		<div class="row">
-			<div class="col-lg-4 col-md-6 ">
-                @foreach ($upcoming as $value)
-				<div class="department-block mb-5">
-                <img src="{{ asset('storage/'.$value->gambar) }}" alt="" class="img-fluid w-100 fixed-size-image" style="height:30vh; width:10vw; border-radius:25px;">
-					<div class="content">
-						<h4 class="mt-4 mb-2 title-color">{{$value->judul}}</h4>
-						<a href="{{url('view/acara/akan_datang_single')}}" class="read-more">Selengkapnya  <i class="icofont-simple-right ml-2"></i></a>
-					</div>
-				</div>
-                @endforeach
-			</div>
-		</div>
-	</div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 ">
+        @foreach ($upcoming as $value)
+        <div class="department-block mb-5">
+          <img src="{{ asset('storage/'.$value->gambar) }}" alt="" class="img-fluid w-100 fixed-size-image" style="height:30vh; width:10vw; border-radius:25px;">
+          <div class="content">
+            <h4 class="mt-4 mb-2 title-color">{{$value->judul}}</h4>
+            <a href="{{ url('/' . $nama_gereja . '/view/acara/akan_datang_single') }}" class="read-more">Selengkapnya <i class="icofont-simple-right ml-2"></i></a>
+          </div>
+        </div>
+        @endforeach
+      </div>
+    </div>
+  </div>
 </section>
 
 @endsection

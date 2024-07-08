@@ -44,30 +44,45 @@
                         <br>
                     </div>
                 </div>
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form method="post" enctype="multipart/form-data">
                     @csrf
                     <!-- Display validation errors -->
                     @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
-                
+
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Jam Mulai</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="jam_mulai_pagi" class="form-control" type="time" value="{{ old('jam_mulai_pagi') }}" />
+                            <input name="jam_mulai_pagi" class="form-control" type="time" value="{{ Auth::user()->gereja->home->first()->jam_mulai_pagi }}" />
                         </div>
                     </div>
-                
+
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Jam Selesai</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="jam_selesai_pagi" class="form-control" type="time" value="{{ old('jam_selesai_pagi') }}" />
+                            <input name="jam_selesai_pagi" class="form-control" type="time" value="{{ Auth::user()->gereja->home->first()->jam_selesai_pagi }}" />
                         </div>
                     </div>
                     <hr>
@@ -76,14 +91,14 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Jam Mulai</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="jam_mulai_siang" class="form-control" type="time" value="{{ old('jam_mulai_siang') }}" />
+                            <input name="jam_mulai_siang" class="form-control" type="time" value="{{ Auth::user()->gereja->home->first()->jam_mulai_siang }}" />
                         </div>
                     </div>
-                
+
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Jam Selesai</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="jam_selesai_siang" class="form-control" type="time" value="{{ old('jam_selesai_siang') }}" />
+                            <input name="jam_selesai_siang" class="form-control" type="time" value="{{ Auth::user()->gereja->home->first()->jam_selesai_siang }}" />
                         </div>
                     </div>
                     <hr>
@@ -96,13 +111,13 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Channel YouTube</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="youtube" class="form-control" type="text" value="{{ old('youtube') }}" />
+                            <input name="youtube" class="form-control" type="text" value="{{ Auth::user()->gereja->home->first()->youtube }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Link YouTube</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="link" class="form-control" type="text" value="{{ old('link') }}" />
+                            <input name="link" class="form-control" type="text" value="{{ Auth::user()->gereja->home->first()->link }}" />
                         </div>
                     </div>
                     <hr>
@@ -115,25 +130,25 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Kartu Keluarga</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="kartu_keluarga" class="form-control" type="text" value="{{ old('kartu_keluarga') }}" />
+                            <input name="kartu_keluarga" class="form-control" type="text" value="{{ Auth::user()->gereja->home->first()->kartu_keluarga }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Total Jemaat</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="total_jemaat" class="form-control" type="number" value="{{ old('total_jemaat') }}" />
+                            <input name="total_jemaat" class="form-control" type="number" value="{{ Auth::user()->gereja->home->first()->total_jemaat }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Total BPH</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="total_bph" class="form-control" type="number" value="{{ old('total_bph') }}" />
+                            <input name="total_bph" class="form-control" type="number" value="{{ Auth::user()->gereja->home->first()->total_bph }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Total Pendeta</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="total_pendeta" class="form-control" type="number" value="{{ old('total_pendeta') }}" />
+                            <input name="total_pendeta" class="form-control" type="number" value="{{ Auth::user()->gereja->home->first()->total_pendeta }}" />
                         </div>
                     </div>
                     <div class="clearfix">
@@ -146,13 +161,13 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">No. Telepon</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="no_telp" class="form-control" type="text" value="{{ old('no_telp') }}" />
+                            <input name="no_telp" class="form-control" type="text" value="{{ Auth::user()->gereja->home->first()->no_telp }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Email</label>
                         <div class="col-sm-12 col-md-10">
-                            <input name="email" class="form-control" type="text" value="{{ old('email') }}" />
+                            <input name="email" class="form-control" type="text" value="{{ Auth::user()->gereja->home->first()->email }}" />
                         </div>
                     </div>
                     <hr>
@@ -160,8 +175,8 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
-                
-                    </div>
+
+            </div>
 
 
             <!-- Default Basic Forms End -->
