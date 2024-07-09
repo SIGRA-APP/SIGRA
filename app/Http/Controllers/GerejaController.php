@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gereja;
+use App\Models\HomeModel;
 use Illuminate\Http\Request;
 
 class GerejaController extends Controller
@@ -48,6 +49,10 @@ class GerejaController extends Controller
 
 
         if ($info->save()) {
+            $home = new HomeModel();
+            $home->gereja_id = $info->id;
+            $home->save();
+
             return redirect()->back()->with('success', 'Data informasi gereja berhasil disimpan.');
         } else {
             return redirect()->back()->withErrors(['error' => 'Gagal menyimpan data informasi gereja.']);

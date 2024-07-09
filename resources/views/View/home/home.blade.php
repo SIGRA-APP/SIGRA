@@ -37,9 +37,8 @@
                         <h4 class="mb-3">Ibadah Online</h4>
                         <li class="d-flex justify-content-between">Youtube :
                             <span></span>
-                            <a href="{{$data_home->link}}" target="_blank">{{$data_home->gereja->online}}</a>
+                            <a href="{{ optional($data_home)->link ?? '' }}" target="_blank">{{ optional(optional($data_home)->gereja)->online ?? '' }}</a>
                         </li>
-
                     </div>
 
                     <div class="feature-item mb-5 mb-lg-0">
@@ -50,12 +49,12 @@
                         <h4 class="mb-3">Sesi Ibadah</h4>
                         <ul class="w-hours list-unstyled">
                             <li class="d-flex justify-content-between">Pagi :
-                                <span></span>{{ substr($data_home->jam_mulai_pagi, 0, 5) }} -
-                                {{ substr($data_home->jam_selesai_pagi, 0, 5) }}
+                                <span></span>{{ optional($data_home)->jam_mulai_pagi ? substr($data_home->jam_mulai_pagi, 0, 5) : '' }} -
+                                {{ optional($data_home)->jam_selesai_pagi ? substr($data_home->jam_selesai_pagi, 0, 5) : '' }}
                             </li>
                             <li class="d-flex justify-content-between">Siang :
-                                <span>{{ substr($data_home->jam_mulai_siang, 0, 5) }} -
-                                    {{ substr($data_home->jam_selesai_siang, 0, 5) }}</span>
+                                <span>{{ optional($data_home)->jam_mulai_siang ? substr($data_home->jam_mulai_siang, 0, 5) : '' }} -
+                                    {{ optional($data_home)->jam_selesai_siang ? substr($data_home->jam_selesai_siang, 0, 5) : '' }}</span>
                             </li>
                         </ul>
                     </div>
@@ -67,10 +66,10 @@
                         <h4 class="mb-3">Contact Person</h4>
                         <ul class="w-hours list-unstyled">
                             <li class="d-flex justify-content-between">Telepon :
-                                <span></span>{{$data_home->no_telp}}
+                                <span></span>{{ optional($data_home)->no_telp ?? '' }}
                             </li>
                             <li class="d-flex justify-content-between">Email :
-                                <span>{{$data_home->email}}</span>
+                                <span>{{ optional($data_home)->email ?? '' }}</span>
                             </li>
                         </ul>
                     </div>
@@ -87,14 +86,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter-stat">
                         <i class="icofont-doctor"></i>
-                        <span class="h3">{{$data_home->kartu_keluarga}}</span>KK
+                        <span class="h3">{{ optional($data_home)->kartu_keluarga ?? '' }}</span>KK
                         <p>Kartu Keluarga</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter-stat">
                         <i class="icofont-doctor"></i>
-                        <span class="h3">{{$data_home->total_jemaat}}</span>+
+                        <span class="h3">{{ optional($data_home)->total_jemaat ?? '' }}</span>+
                         <p>Jemaat</p>
                     </div>
                 </div>
@@ -102,14 +101,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter-stat">
                         <i class="icofont-doctor"></i>
-                        <span class="h3">{{$data_home->total_bph}}</span>+
+                        <span class="h3">{{ optional($data_home)->total_bph ?? '' }}</span>+
                         <p>BPH</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="counter-stat">
                         <i class="icofont-doctor"></i>
-                        <span class="h3">{{$data_home->total_pendeta}}</span>+
+                        <span class="h3">{{ optional($data_home)->total_pendeta ?? '' }}</span>+
                         <p>Pendeta / Gembala</p>
                     </div>
                 </div>
@@ -124,7 +123,6 @@
 <br>
 <br>
 <br>
-
 
 @endsection
 
