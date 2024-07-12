@@ -28,8 +28,8 @@
 
                         @endforeach
                         <div class="single-blog-item" id="content-to-download">
-                            <img src="{{ asset('storage/images/' . $value->gambar) }}" alt="" class="img-fluid"
-                            style="height:60vh; width:120vh; border-radius:15px; display: block; margin-left: auto; margin-right: auto;">
+                            <img src="{{ asset($value->gambar) }}" alt="" class="img-fluid"
+                            style="height:60vh;border-radius:15px; display: block; margin-left: auto; margin-right: auto;">
 
                             <div class="blog-item-content mt-5">
                                 <div class="blog-item-meta mb-3">

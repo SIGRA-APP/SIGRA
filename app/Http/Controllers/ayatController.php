@@ -57,9 +57,9 @@ class ayatController extends Controller
         // Proses upload gambar
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
-            $originalName = $gambar->getClientOriginalName(); // Mendapatkan nama asli file
-            $gambarPath = $gambar->storeAs('public/images', $originalName); // Menyimpan file dengan nama asli
-            $namaFile = basename($gambarPath); // Mendapatkan nama file saja dari path
+            $originalName = time() . '.' . $gambar->extension(); // Mendapatkan nama asli file
+            $gambarPath = $gambar->storeAs('uploads', $originalName, 'public'); // Menyimpan file dengan nama asli
+            $gambar->move(public_path('uploads'), $originalName);
         }
 
         // Konversi format tanggal
@@ -70,7 +70,7 @@ class ayatController extends Controller
             'Ayat' => $validatedData['Ayat'],
             'Tema' => $validatedData['Tema'],
             'tanggal' => $tanggal, // Gunakan format tanggal yang benar
-            'gambar' => $namaFile, // Gunakan nama file yang disimpan
+            'gambar' => $gambarPath, // Gunakan nama file yang disimpan
             'Detail' => $validatedData['Detail'],
             'gereja_id' => Auth::user()->gereja->id
         ]);
@@ -82,11 +82,10 @@ class ayatController extends Controller
     }
 
 
-    public function ayat_single(Request $request)
+    public function ayat_single(Request $request, $nama_gereja,  $id)
     {
         $gereja =  $request->gereja;
-        $ayats = AyatHarianModel::where('gereja_id',$gereja->id)->get();
-        $nama_gereja = $request->gereja->nama_gereja; 
+        $ayats = AyatHarianModel::where('id',$id)->get();
         $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
         return view('view.postingan.ayat_single', compact('ayats','nama_gereja','data_home'));
     }

@@ -52,7 +52,7 @@
 	      	<div class="position-relative doctor-inner-box">
 		        <div class="doctor-profile">
 	               <div class="doctor-img">
-                   <img src="{{$value->gambar}}" alt="bph-image" class="img-fluid w-100 fixed-size-img" style="border-radius:25px;">
+                   <img src="{{ asset($value->gambar) }}" alt="bph-image" class="img-fluid w-100 fixed-size-img" style="border-radius:25px;">
 	               </div>
 	            </div>
                 <div class="content mt-3">

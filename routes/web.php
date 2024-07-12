@@ -168,8 +168,8 @@ Route::prefix('{nama_gereja}')->middleware(CheckGereja::class)->group(function (
     });
 
     // Single View Routes
-    Route::get('view/postingan/warta_single', [WartaController::class, 'warta_single']);
-    Route::get('view/postingan/ayat_single', [AyatController::class, 'ayat_single']);
-    Route::get('view/acara/akan_datang_single', [AcaraController::class, 'akan_datang_single']);
-    Route::get('view/acara/ibadah_raya_single', [IbadahRayaController::class, 'ibadah_raya_single']);
+    Route::get('view/postingan/warta_single/{id}', [WartaController::class, 'warta_single']);
+    Route::get('view/postingan/ayat_single/{id}', [AyatController::class, 'ayat_single']);
+    Route::get('view/acara/akan_datang_single/{id}', [AcaraController::class, 'akan_datang_single']);
+    Route::get('view/acara/ibadah_raya_single/{id}', [IbadahRayaController::class, 'ibadah_raya_single']);
 });

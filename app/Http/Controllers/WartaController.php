@@ -103,8 +103,9 @@ class WartaController extends Controller
     
         if ($validatedData['gambar_option'] == 'custom' && $request->hasFile('gambar')) {
             $image = $request->file('gambar');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = time() . '.' . $image->extension();
             $imagePath = $image->storeAs('uploads', $imageName, 'public');
+            $image->move(public_path('uploads'), $imageName);
             $warta->gambar = $imagePath;
         } else {
             $warta->gambar = 'admin/default.jpg';
@@ -116,10 +117,10 @@ class WartaController extends Controller
     }
     
 
-    public function warta_single(Request $request)
+    public function warta_single(Request $request, $nama_gereja, $id)
     {
         $gereja = $request->gereja;
-        $wartas = WartaModel::where('gereja_id', $gereja->id)->get();
+        $wartas = WartaModel::where('id',$id)->get();
         $nama_gereja = $gereja->nama_gereja;
         $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
         return view('view.postingan.warta_single', compact('wartas', 'nama_gereja','data_home'));

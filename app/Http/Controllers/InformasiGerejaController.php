@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Auth;
 class InformasiGerejaController extends Controller
 {
 
-   
-
     public function add(Request $request)
     {
         $nama_gereja = $request->gereja->nama_gereja; 
@@ -74,10 +72,12 @@ class InformasiGerejaController extends Controller
         // Upload gambar jika ada
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
-            $gambarPath = $gambar->store('public/images'); // Simpan gambar ke storage
+            $gambarName = time() . '.' . $gambar->extension(); // Simpan gambar ke storage
 
             // Simpan path gambar ke dalam database
-            $bph->gambar = Storage::url($gambarPath);
+            $gambarPath = $gambar->storeAs('uploads', $gambarName, 'public'); 
+            $gambar->move(public_path('uploads'), $gambarName);
+            $bph->gambar = $gambarPath;
         }
 
         $bph->save();
@@ -123,10 +123,12 @@ class InformasiGerejaController extends Controller
         // Upload gambar jika ada
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
-            $gambarPath = $gambar->store('public/images'); // Simpan gambar ke storage
+            $gambarName = time() . '.' . $gambar->extension(); // Simpan gambar ke storage
 
             // Simpan path gambar ke dalam database
-            $pendeta->gambar = Storage::url($gambarPath);
+            $gambarPath = $gambar->storeAs('uploads', $gambarName, 'public'); 
+            $gambar->move(public_path('uploads'), $gambarName);
+            $pendeta->gambar = $gambarPath;
         }
 
         $pendeta->save();

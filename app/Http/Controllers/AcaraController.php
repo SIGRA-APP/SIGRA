@@ -56,9 +56,10 @@ class AcaraController extends Controller
         // Jika ada file gambar yang diunggah, simpan dan atur nama gambar
         if ($request->hasFile('gambar')) {
             $image = $request->file('gambar');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = time() . '.' . $image->extension();
             // Simpan gambar ke dalam penyimpanan (storage)
             $imageName = $image->storeAs('uploads', $imageName, 'public');
+            $image->move(public_path('uploads'), $imageName);
         }
 
         // Buat data acara baru
@@ -103,9 +104,10 @@ class AcaraController extends Controller
         // Jika ada file gambar yang diunggah, simpan gambar baru
         if ($request->hasFile('gambar')) {
             $image = $request->file('gambar');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = time() . '.' . $image->extension();
             $imagePath = $image->storeAs('uploads', $imageName, 'public');
-            $acara->gambar = $imagePath;  // Update property 'gambar' of the model
+            $acara->gambar = $imagePath;  // Update property 'gambar' of the model.
+            $image->move(public_path('uploads'), $imageName);
         }
 
         // Simpan perubahan ke dalam database
@@ -133,11 +135,10 @@ class AcaraController extends Controller
         return redirect()->route('acara.upcoming.list_acara')->with('success', 'Acara berhasil dihapus!');
     }
 
-    public function akan_datang_single(Request $request)
+    public function akan_datang_single(Request $request, $nama_gereja, $id)
     {
         $gereja =  $request->gereja;
-        $upcomings = UpcomingModel::where('gereja_id', $gereja->id)->get();
-        $nama_gereja = $request->gereja->nama_gereja; 
+        $upcomings = UpcomingModel::where('id', $id)->get();
         $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
         return view('view.acara.akan_datang_single', compact('upcomings','nama_gereja','data_home'));
     }

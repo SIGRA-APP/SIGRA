@@ -5,12 +5,16 @@
 
 
 <style>
-    .fixed-size-img {
-        width: 300px; /* Tentukan lebar tetap sesuai kebutuhan Anda */
-        height: 300px; /* Tentukan tinggi tetap sesuai kebutuhan Anda */
-        object-fit: cover; /* Memastikan gambar tidak terdistorsi */
-        border-radius: 25px; /* Tambahkan border-radius jika diperlukan */
-    }
+  .fixed-size-img {
+    width: 300px;
+    /* Tentukan lebar tetap sesuai kebutuhan Anda */
+    height: 300px;
+    /* Tentukan tinggi tetap sesuai kebutuhan Anda */
+    object-fit: cover;
+    /* Memastikan gambar tidak terdistorsi */
+    border-radius: 25px;
+    /* Tambahkan border-radius jika diperlukan */
+  }
 </style>
 
 
@@ -38,35 +42,35 @@
 <!-- portfolio -->
 <section class="section doctors">
   <div class="container">
-  	  <div class="row justify-content-center">
-             <div class="col-lg-6 text-center">
-                <div class="section-title">
-                    <h2>BPH</h2>
-                    <div class="divider mx-auto my-4"></div>
-                </div>
-            </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center">
+        <div class="section-title">
+          <h2>BPH</h2>
+          <div class="divider mx-auto my-4"></div>
         </div>
-    <div class="row shuffle-wrapper portfolio-gallery">
-    @foreach ($data_bph as $value)
-      	<div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat1&quot;,&quot;cat2&quot;]">
-	      	<div class="position-relative doctor-inner-box">
-		        <div class="doctor-profile">
-	               <div class="doctor-img">
-                   <img src="{{$value->gambar}}" alt="bph-image" class="img-fluid w-100 fixed-size-img" style="border-radius:25px;">
-	               </div>
-	            </div>
-                <div class="content mt-3">
-                	<h4 class="mb-0"><a>{{$value->nama}}</a></h4>
-                	<p>{{$value->jabatan}}
-                    <br>
-                    {{$value->deskripsi_singkat}}
-                </p>
-                </div>
-	      	</div>
-      	</div>
-          @endforeach
-        </div>
+      </div>
     </div>
+    <div class="row shuffle-wrapper portfolio-gallery">
+      @foreach ($data_bph as $value)
+      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" data-groups="[&quot;cat1&quot;,&quot;cat2&quot;]">
+        <div class="position-relative doctor-inner-box">
+          <div class="doctor-profile">
+            <div class="doctor-img">
+              <img src="{{ asset($value->gambar) }}" alt="bph-image" class="img-fluid w-100 fixed-size-img" style="border-radius:25px;">
+            </div>
+          </div>
+          <div class="content mt-3">
+            <h4 class="mb-0"><a>{{$value->nama}}</a></h4>
+            <p>{{$value->jabatan}}
+              <br>
+              {{$value->deskripsi_singkat}}
+            </p>
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
+  </div>
   </div>
 </section>
 

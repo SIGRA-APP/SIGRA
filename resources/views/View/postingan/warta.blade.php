@@ -37,11 +37,11 @@
             @foreach($warta as $value)
 			<div class="col-lg-4 col-md-6 ">
 				<div class="department-block mb-5">
-					<img src="{{ asset('storage/'.$value->gambar) }}" alt="" class="img-fluid w-100">
+					<img src="{{ asset($value->gambar) }}" alt="" class="img-fluid w-100">
 					<div class="content">
 						<h4 class="mt-4 mb-2 title-color">{{$value->judul}}</h4>
 						<p class="mb-4">{{ Illuminate\Support\Str::words($value->deskripsi, 25, '...') }}</p>
-						<a href= "{{ url('/' . $nama_gereja . '/view/postingan/warta_single') }}"
+						<a href= "{{ url('/' . $nama_gereja . '/view/postingan/warta_single/'.$value->id) }}"
 						class="read-more">Selengkapnya  <i class="icofont-simple-right ml-2"></i></a>
 					</div>
 				</div>

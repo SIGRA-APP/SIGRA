@@ -48,11 +48,11 @@
       <div class="col-lg-4 col-md-6 ">
         @foreach ($ayat as $value)
         <div class="department-block mb-5">
-          <img src="{{ asset('storage/images/' . $value->gambar) }}" alt="" class="img-fluid w-100 fixed-size-image">
+          <img src="{{ asset($value->gambar) }}" width="250px" alt="" class="img-fluid ">
           <div class="content">
             <h4 class="mt-4 mb-2 title-color">{{$value->Ayat}}</h4>
             <p class="mb-4">{{$value->Tema}}</p>
-            <a href= "{{ url('/' . $nama_gereja . '/view/postingan/ayat_single') }}" class="read-more">Selengkapnya <i class="icofont-simple-right ml-2"></i></a>
+            <a href="{{ url('/' . $nama_gereja . '/view/postingan/ayat_single/'.$value->id) }}" class="read-more">Selengkapnya <i class="icofont-simple-right ml-2"></i></a>
           </div>
         </div>
         @endforeach
