@@ -16,11 +16,10 @@ class BulananController extends Controller
         return view('admin.keuangan.kas.tambah_kas', compact('nama_gereja'));
     }
 
-    public function view_bulanan(Request $request)
+    public function view_bulanan(Request $request, $nama_gereja)
     {
         $gereja = $request->gereja;
         $bulanan = BulananModel::where('gereja_id', $gereja->id)->get();
-        $nama_gereja = $gereja->nama_gereja; 
         $data_home = HomeModel::where('gereja_id', $gereja->id)->first();
         return view('view.keuangan.bulanan', compact('bulanan','nama_gereja','data_home'));
     }
@@ -34,21 +33,16 @@ class BulananController extends Controller
 
     public function store(Request $request)
     {
-        Log::info('Store method called'); // Log ini untuk memastikan method store dipanggil
 
         $request->validate([
             'bulan' => 'required|string|max:255',
             'jumlah' => 'required|string|max:255',
+            'tahun' => 'required|string|max:255',
         ]);
 
-        Log::info('Validation passed'); // Log ini untuk memastikan validasi lulus
-
-        $data = $request->all();
-        Log::info('Data to be saved: ', $data); // Log ini untuk melihat data yang akan disimpan
-
-        BulananModel::create($data);
-
-        Log::info('Data saved successfully'); // Log ini untuk memastikan data berhasil disimpan
+        $bulanan = new BulananModel($request->all());
+        $bulanan->gereja_id = Auth::user()->gereja->id;
+        $bulanan->save();
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }

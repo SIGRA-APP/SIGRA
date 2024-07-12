@@ -43,7 +43,7 @@
                         <tbody>
                             @foreach ($bulanan as $value)
                             <tr>
-                                <td>Sangkar NiHuta</td>
+                                <td>{{$value->gereja->nama_gereja}}</td>
                                 <td>{{$value->bulan}}</td>
                                 <td>{{$value->jumlah}}</td>
                             </tr>

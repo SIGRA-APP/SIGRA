@@ -27,8 +27,9 @@
   <div class="container">
 
     <div class="row">
-      <div class="col-lg-4 col-md-6 ">
-        @foreach ($upcoming as $value)
+
+      @foreach ($upcoming as $value)
+      <div class="col-lg-4 col-md-6">
         <div class="department-block mb-5">
           <img src="{{ asset($value->gambar) }}" width="250px" alt="" class="img-fluid ">
           <div class="content">
@@ -36,8 +37,9 @@
             <a href="{{ url('/' . $nama_gereja . '/view/acara/akan_datang_single/'.$value->id) }}" class="read-more">Selengkapnya <i class="icofont-simple-right ml-2"></i></a>
           </div>
         </div>
-        @endforeach
       </div>
+
+      @endforeach
     </div>
   </div>
 </section>

@@ -10,7 +10,7 @@
       <div class="col-md-12">
         <div class="block text-center">
           <span class="text-white">Sejarah</span>
-          <h1 class="text-capitalize mb-5 text-lg">GKII Sangkar NiHuta</h1>
+          <h1 class="text-capitalize mb-5 text-lg">{{$data_home->gereja->nama_gereja}}</h1>
         </div>
       </div>
     </div>
