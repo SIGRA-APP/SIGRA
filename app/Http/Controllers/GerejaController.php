@@ -72,7 +72,7 @@ class GerejaController extends Controller
      */
     public function edit($id)
     {
-        $gereja = Gereja::findOrFail($id);
+        $gereja = Gereja::where('nama_gereja', $id)->first();
         $nama_gereja = $gereja->first()->nama_gereja;
         return view('admin.info-gereja.edit', compact('gereja','nama_gereja'));
     }
@@ -90,12 +90,13 @@ class GerejaController extends Controller
             'kontak' => 'required|string|max:1024',
         ]);
 
-        $info = Gereja::findOrFail($id);
+        $info = Gereja::where('nama_gereja', $id)->first();
         $info->nama_gereja = $validatedData['nama_gereja'];
         $info->kutipan = $validatedData['kutipan'];
         $info->online = $validatedData['online'];
         $info->sesi = $validatedData['sesi'];
         $info->kontak = $validatedData['kontak'];
+
 
         if ($info->save()) {
             return redirect()->back()->with('success', 'Data informasi gereja berhasil diperbarui.');
@@ -109,7 +110,7 @@ class GerejaController extends Controller
      */
     public function destroy($id)
     {
-        $info = Gereja::findOrFail($id);
+        $info = Gereja::where('nama_gereja', $id)->first();
 
         if ($info->delete()) {
             return redirect()->back()->with('success', 'Data informasi gereja berhasil dihapus.');

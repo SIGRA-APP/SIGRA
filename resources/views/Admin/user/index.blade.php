@@ -40,9 +40,10 @@
                             <a href="{{ url('/' . $nama_gereja . '/list-admin/' . $u->id . '/edit') }}" class="btn btn-sm btn-primary">Edit</a>
                             <form action="{{ url('/' . $nama_gereja . '/list-admin/' . $u->id . '/destroy') }}" method="POST" style="display:inline-block;">
                                 @csrf
-                                @method('DELETE')
+                                <input type="hidden" name="admin_id" value="{{$u->id}}">
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Hapus</button>
                             </form>
+                            <input type="hidden" name="id_admin" value="{{$u->id}}">
                         </td>
                     </tr>
                 @endforeach

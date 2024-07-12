@@ -61,23 +61,22 @@ Route::prefix('{nama_gereja}')->middleware(CheckGereja::class)->group(function (
 
         Route::post('/info/store', [GerejaController::class, 'store']);
 
-        Route::get('/info/{id}/edit', [GerejaController::class, 'edit']);
+        Route::get('/info/edit/{id}', [GerejaController::class, 'edit']);
         
+        Route::post('/info/update/{id}', [GerejaController::class, 'update']);
 
-        Route::post('/info/{id}', [GerejaController::class, 'update']);
+        Route::post('/info/destroy/{id}', [GerejaController::class, 'destroy']);
 
-        Route::post('/info/{info}', [GerejaController::class, 'destroy']);
-
-        Route::post('/info/{info}', [GerejaController::class, 'store']);
 
         // Admin Gereja Route
-        Route::resource('list-admin', AdminController::class);
+        Route::get('/list-admin', [AdminController::class, 'index'])->name('list-admin.index');
+        Route::get('/list-admin/create', [AdminController::class, 'create'])->name('list-admin.create');
+        Route::post('/list-admin', [AdminController::class, 'store'])->name('list-admin.store');
+        Route::get('/list-admin/{id}/edit', [AdminController::class, 'edit'])->name('list-admin.edit');
+        Route::post('/list-admin/{id}/update', [AdminController::class, 'update'])->name('list-admin.update');
+        Route::post('/list-admin/{id}/destroy', [AdminController::class, 'destroy'])->name('list-admin.destroy');
 
-        Route::get('/list-admin/{id}/edit', [GerejaController::class, 'edit']);
-
-        Route::post('/list-admin/{id}', [GerejaController::class, 'update']);
-
-        Route::post('/list-admin/{info}', [GerejaController::class, 'destroy']);
+  
 
         Route::get('landing', [AuthController::class, 'landing'])->name('landing');
 

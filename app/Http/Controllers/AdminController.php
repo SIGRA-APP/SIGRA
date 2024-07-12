@@ -6,6 +6,7 @@ use App\Models\Gereja;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
 
 class AdminController extends Controller
 {
@@ -68,11 +69,10 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit($nama_gereja, $id)
     {
-        $gereja = Gereja::all(); 
-        $nama_gereja = Gereja::first()->nama_gereja;
-        $admin = Users::findOrFail($id);
+        $gereja = Gereja::all();
+        $admin = Users::where('id',$id)->first();
         return view('admin.user.edit', compact('admin','gereja','nama_gereja'));
     }
 
@@ -81,6 +81,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:1024',
@@ -88,7 +89,9 @@ class AdminController extends Controller
             'gereja_id' => 'required|string|max:1024'
         ]);
 
-        $admin = Users::findOrFail($id);
+        
+
+        $admin = Users::findOrFail($request->admin_id);
         $admin->name = $validatedData['name'];
         $admin->username = $validatedData['username'];
         $admin->email = $validatedData['email'];
@@ -108,8 +111,9 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Users $admin)
+    public function destroy(Request $request)
     {
+        $admin = Users::findOrFail($request->admin_id);
         if ($admin->delete()) {
             return redirect()->back()->with('success', 'Admin gereja berhasil dihapus.');
         } else {

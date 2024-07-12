@@ -15,7 +15,7 @@
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="{{ route('info.index') }}">Home</a>
+                                    <a href="{{ url('/' . $nama_gereja . '/info') }}">Home</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     Edit Informasi Gereja
@@ -49,9 +49,8 @@
                 </div>
                 @endif
 
-                <form action="{{ route('info.update', $gereja->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/' . $gereja->nama_gereja . '/info/update/' . $gereja->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Nama Gereja</label>
                         <div class="col-sm-12 col-md-10">

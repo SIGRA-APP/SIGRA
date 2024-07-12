@@ -17,7 +17,7 @@
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="{{ route('list-admin.index') }}">Home</a>
+                                    <a href="{{ route('list-admin.index',$nama_gereja) }}">Home</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     Edit Informasi Admin Gereja
@@ -51,9 +51,9 @@
                 </div>
                 @endif
 
-                <form action="{{ route('list-admin.update', $admin->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/' . $nama_gereja . '/list-admin/' . $admin->id . '/update') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
+                    <input type="hidden" name="admin_id" value="{{$admin->id}}">
                     <div class="form-group row">
                         <label class="col-sm-12 col-md-2 col-form-label">Name</label>
                         <div class="col-sm-12 col-md-10">
